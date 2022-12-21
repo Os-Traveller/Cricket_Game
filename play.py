@@ -1,22 +1,18 @@
-import os
-import random
-import time
+import playMaking
 
 
-def play(over, run, wicket, extra):
-    ball = 1;
-    while ball <= over * 6:
-        # generating random number for play making
-        os.system('clear')
-        rand_num = random.randint(0, 7)
-        if rand_num == 5:
-            extra += 1
-            run += 1
-        elif rand_num == 7:
-            wicket += 1
-        else:
-            run += rand_num
+def play(over, team1, team2):
+    # start function
+    innings = 1
+    target = 0
+    # finding whose team is batting first
+    if team1["batting"]:
+        print("\t\t******* team1 batting *******\n")
+        playMaking.play_making(over, team1, team2, innings, target)
 
-        print(run, "/", wicket)
-        time.sleep(0.5)
-        ball += 1
+    else:
+        print("\t\t******* team2 batting *******\n")
+        playMaking.play_making(over, team2, team1, innings, target)
+
+    # finding if it's the first innings or second innings
+    # end Function

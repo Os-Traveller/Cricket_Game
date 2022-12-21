@@ -1,16 +1,18 @@
 import play
+import random
+import team
 
+team1 = team.team1
+team2 = team.team2
 over = int(input("Over : "))
-extra = 0
-wicket = 0
-run = 0
-ball = 1
+toss = random.randint(1, 2)
+innings = 1
 
-# team object
-team1 = {
-    "name": "Bangladesh",
-    "total_run": 0,
-}
+if toss % 2 == 0:
+    team1["batting"] = True
+    team2["bolwing"] = True
+else:
+    team2["batting"] = True
+    team1["bowling"] = True
 
-play.play(over, run, wicket, extra)
-
+play.play(over, team1, team2)
