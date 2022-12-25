@@ -4,7 +4,7 @@ import team
 
 team1 = team.team1
 team2 = team.team2
-over = int(input("Over : "))
+over = int(input("\nOver : "))
 toss = random.randint(1, 2)
 innings = 1
 
