@@ -8,18 +8,18 @@ def play(over, team1, team2):
     target = 0
     
     # finding whose team is batting first
-    print("")
     if team1["batting"]:
-        print("*******", team1["name"], "batting *******\n")
+        print("\n\t*******", team1["name"], "batting *******\n")
         playMaking.play_making(over, team1, team2, innings, target)
         target = team1["total_run"] + 1
-        print("\n***", team2["name"], "needs", target, "runs of", over, "overs to win ***\n")
+        print("\n\t***", team2["name"], "needs", target, "runs of", over, "overs to win ***\n")
         innings = 2
         
-        print("*******", team2["name"], "batting *******\n")
+        print("\t*******", team2["name"], "batting *******\n")
         playMaking.play_making(over, team2, team1, innings, target)
         
         # score card
+        print("")
         ulility.score_card(team1)
         ulility.score_card(team2)
         
@@ -32,16 +32,17 @@ def play(over, team1, team2):
             print("\n\t*** Match Tied ***\n")
         
     else:
-        print("*******", team2["name"], "batting *******\n")
+        print("\n\t*******", team2["name"], "batting *******\n")
         playMaking.play_making(over, team2, team1, innings, target)
         target = team2["total_run"] + 1
-        print("\n***", team1["name"], "needs", target, "runs of", over, "overs to win ***\n")
+        print("\n\t***", team1["name"], "needs", target, "runs of", over, "overs to win ***\n")
         innings = 2
         
-        print("*******", team1["name"], "batting *******\n")
+        print("\t*******", team1["name"], "batting *******\n")
         playMaking.play_making(over, team1, team2, innings, target)
         
         # score card 
+        print("")
         ulility.score_card(team2)
         ulility.score_card(team1)
         
@@ -51,5 +52,5 @@ def play(over, team1, team2):
         elif team1["total_run"] > team2["total_run"]:
             print("\n\t***", team1["name"],"Won By", 10 - team1["wicket"], "Wicket ***\n")
         else:
-            print("\n\t*** Match Tied ***\n")
+            print("\n\t\t*** Match Tied ***\n")
     # end Function

@@ -1,18 +1,8 @@
-def show_run(ball, outcome, run, wicket, batter_name, batter_run, ball_faced):
-    if run < 10:
-        if outcome == "No Ball":
-            print(ball, "\t", outcome, "\t", run, "/", wicket, "\t\t",
-                  batter_name, "[Run:", batter_run, "* Balls :", str(ball_faced) + "]")
-        else:
-            print(ball, "\t", outcome, "\t\t", run, "/", wicket, "\t\t",
-                  batter_name, "[Run:", batter_run, "* Balls :", str(ball_faced) + "]")
-    else:
-        if outcome == "No Ball":
-            print(ball, "\t", outcome, "\t", run, "/", wicket, "\t",
-                  batter_name, "[Run:", batter_run, "* Balls :", str(ball_faced) + "]")
-        else:
-            print(ball, "\t", outcome, "\t\t", run, "/", wicket, "\t",
-                  batter_name, "[Run:", batter_run, "* Balls :", str(ball_faced) + "]")
+def show_run(over, ball, outcome, run, wicket, batter_name, batter_run, ball_faced):
+    over_str = str(over - 1) + "." + str(ball)
+    player_str = batter_name + " [Run : " + str(batter_run) + " Ball : " + str(ball_faced) + " ]"
+    
+    print("\t" + formatter(over_str, 10) + formatter(str(outcome), 10) + formatter(str(run) + "/" + str(wicket), 10) + player_str)
 
 
 def batter_out(position, batting_team):
@@ -29,9 +19,48 @@ def batter_out(position, batting_team):
     i = 0
     while(i < len(batter)):
         if(not batter[i]["batting"]):
-            print("[" + str(i) + "] :", batter[i]["name"])
+            print("\t[" + str(i) + "] :", batter[i]["name"])
         i += 1
     
+ 
+def formatter(content, total_space):
+    temp_str = content
+    i = 1
+    while(i <= total_space - len(content)):
+        temp_str += " "
+        i += 1
+        
+    return temp_str
+     
     
 def score_card(team):
-    print(team["ball"])
+    print("\n\t\t\t *****", team["name"], "*****\n")
+    print("\t" + formatter("Player Name", 20) + formatter("Run", 8) + formatter("Ball", 8), "Strike Rate\n")
+    
+    batters = team["players"]
+    i = 0
+    while(i < len(batters)):
+        if batters[i]["batting"]:
+            name = batters[i]["name"]
+            run = batters[i]["run"]
+            ball = batters[i]["ball_faced"]
+            
+            strike_rate = 0.0
+            if ball > 0:
+                strike_rate = round(run * 100 / ball, 2)
+                
+            print("\t" + formatter(name, 20) + formatter(str(run), 8) + formatter(str(ball), 8), strike_rate)
+        
+        # condition ends
+        i += 1
+    # loop ends
+    team_ball = team["ball"]
+    over = str(int(team_ball / 6))
+    over += "." + str(team_ball % 6)
+    extra = team["extra"]
+    total_run = team["total_run"]
+    wicket = team["wicket"]
+    
+    print("\n\tOver :", over, "\tExtra :", extra, "\tTotal :", total_run, "/", wicket, "\n")
+    
+    

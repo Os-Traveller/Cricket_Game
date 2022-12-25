@@ -2,6 +2,7 @@
 team1 = {
     "name": "Bangladesh",
     "total_run": 0,
+    "extra": 0,
     "wicket": 0,
     "ball": 0,
     "batting": False,
@@ -25,6 +26,7 @@ team1 = {
 team2 = {
     "name": "India",
     "total_run": 0,
+    "extra": 0,
     "wicket": 0,
     "ball": 0,
     "batting": False,

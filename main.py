@@ -4,7 +4,14 @@ import team
 
 team1 = team.team1
 team2 = team.team2
-over = int(input("\nOver : "))
+
+while(1):
+    over = int(input("\n\tOver : "))
+    if over > 0:
+        break
+    else:
+        print("\n\t*** Over should be greater than 0 ***")
+    
 toss = random.randint(1, 2)
 innings = 1
 

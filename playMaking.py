@@ -11,12 +11,13 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
     extra = 0
     run = 0
      
-    print("******* Pick Your Two Batter *******\n")
+    print("\t******* Pick Your Two Batter *******\n")
     batter = batting_team["players"]
 
     i = 0
     while i < len(batter):
-        print("[" + str(i) + "] :", batter[i]["name"])
+        print("\t[" + str(i) + "] :", batter[i]["name"])
+        time.sleep(0.05)
         i += 1
 
     striker_position = 0
@@ -24,7 +25,7 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
     
     # handleing invalid position for any batter
     while(1):        
-        striker_position = int(input("\nBatter 1 : "))    
+        striker_position = int(input("\n\tBatter 1 : "))    
         if striker_position < 0 or striker_position > 10 :
             print("\n\t*** Invaliad Choice, Try Again ***")
             continue
@@ -32,7 +33,7 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
             break
     
     while(1):
-        non_striker_position = int(input("Batter 2: "))
+        non_striker_position = int(input("\tBatter 2: "))
         if non_striker_position < 0 or non_striker_position > 10:
             print("\n\t*** Invaliad Choice, Try Again ***")
             continue
@@ -45,15 +46,17 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
     
     previous_outcome = ""
     free_hit = False
-    print("\nBall\t Outcome\t Score\t\t Batter")
+    formatter = ulility.formatter
+    print("\n\t" + formatter("Over", 10) + formatter("Outcome", 10) + formatter("Run", 10), "Player\n")
     
+    # games starts here 
     while over <= total_over:
         # start loop
         # generating random number for play making
         rand_num = random.randint(0, 8)
         
         if free_hit:
-            print("\n\t\t*** Free Hit ***\n")
+            print("\n\t*** Free Hit ***\n")
 
         if rand_num == 5:
             if not free_hit:
@@ -61,8 +64,13 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
                 batting_team["wicket"] += 1
                 batting_team["players"][striker_position]["ball_faced"] += 1
                 outcome = "OUT"
-                ulility.show_run(ball, outcome, run, wicket, batting_team["players"][striker_position]["name"],
-                         batting_team["players"][striker_position]["run"], batting_team["players"][striker_position]["ball_faced"])
+                
+                # necessary variables
+                player_name = batting_team["players"][striker_position]["name"]
+                players_run = batting_team["players"][striker_position]["run"]
+                player_ball = batting_team["players"][striker_position]["ball_faced"]
+                
+                ulility.show_run(over, ball, outcome, run, wicket, player_name, players_run, player_ball)
             
                 ulility.batter_out(striker_position, batting_team)
                 
@@ -73,9 +81,9 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
                 
                 # making sure a batsman can not bat twice
                 while(1):
-                    striker_position = int(input("\nNext Batter : "))
+                    striker_position = int(input("\n\tNext Batter : "))
                     if(batting_team["players"][striker_position]["batting"]):
-                        print("\n*** A batter can not bat twice ***")
+                        print("\n\t*** A batter can not bat twice ***")
                         continue
                     else:
                         break
@@ -88,8 +96,13 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
             run += 1
             outcome = "Wide"
             previous_outcome = "Wide"
-            ulility.show_run(ball, outcome, run, wicket, batting_team["players"][striker_position]["name"],
-                         batting_team["players"][striker_position]["run"], batting_team["players"][striker_position]["ball_faced"])
+            
+            # necessary variables
+            player_name = batting_team["players"][striker_position]["name"]
+            players_run = batting_team["players"][striker_position]["run"]
+            player_ball = batting_team["players"][striker_position]["ball_faced"]
+            
+            ulility.show_run(over, ball, outcome, run, wicket, player_name, players_run, player_ball)
 
         elif rand_num == 8:
             extra += 1
@@ -97,8 +110,13 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
             outcome = "No Ball"
             free_hit = True
             previous_outcome = "No Ball"
-            ulility.show_run(ball, outcome, run, wicket, batting_team["players"][striker_position]["name"],
-                         batting_team["players"][striker_position]["run"], batting_team["players"][striker_position]["ball_faced"])
+            
+            # necessary variables
+            player_name = batting_team["players"][striker_position]["name"]
+            players_run = batting_team["players"][striker_position]["run"]
+            player_ball = batting_team["players"][striker_position]["ball_faced"]
+            
+            ulility.show_run(over, ball, outcome, run, wicket, player_name, players_run, player_ball)
 
         else:
             run += rand_num
@@ -107,16 +125,25 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
             outcome = rand_num
             previous_outcome = ""
             if rand_num == 1 or rand_num == 3:
+                # necessary variables
+                player_name = batting_team["players"][striker_position]["name"]
+                players_run = batting_team["players"][striker_position]["run"]
+                player_ball = batting_team["players"][striker_position]["ball_faced"]
+                
                 # swapping batters position
                 temp = striker_position
                 striker_position = non_striker_position
                 non_striker_position = temp
-                ulility.show_run(ball, outcome, run, wicket, batting_team["players"][striker_position]["name"],
-                         batting_team["players"][striker_position]["run"], batting_team["players"][striker_position]["ball_faced"])
+                
+                ulility.show_run(over, ball, outcome, run, wicket, player_name, players_run, player_ball)
 
             else:
-                ulility.show_run(ball, outcome, run, wicket, batting_team["players"][striker_position]["name"],
-                         batting_team["players"][striker_position]["run"], batting_team["players"][striker_position]["ball_faced"])
+                # necessary variables
+                player_name = batting_team["players"][striker_position]["name"]
+                players_run = batting_team["players"][striker_position]["run"]
+                player_ball = batting_team["players"][striker_position]["ball_faced"]
+                
+                ulility.show_run(over, ball, outcome, run, wicket, player_name, players_run, player_ball)
 
         # fixing white space
         time.sleep(0.05)
@@ -144,4 +171,5 @@ def play_making(total_over, batting_team, bowling_team, innings, target):
                 break
         # end loop
     batting_team["total_run"] = run
+    batting_team["extra"] = extra
     # end of the function
