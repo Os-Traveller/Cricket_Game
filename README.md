@@ -1,3 +1,3 @@
 # Cricket Game
 
-In this game all I wanted to simulate a cricket games
+### To run this just execte main.py
